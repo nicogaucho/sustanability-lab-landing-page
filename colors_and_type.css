@@ -1,0 +1,195 @@
+/* ============================================================
+   Agüita Design System — Colors & Type
+   A beach/surf hostel in Las Palmas de Gran Canaria.
+   Colors taken from the beach, the sea and the sky.
+   ============================================================ */
+
+/* ---- Fonts ----------------------------------------------------
+   Brand fonts are commercial:
+     • Display  : "Avocado Cake" (Letteralle)  — cheerful handwritten display
+     • Script   : "Blog Script Light" (Sudtipos) — brush script, longer/marketing copy
+     • Functional: "Helvetica Neue LT Std" (Light) — pairs with the logotype
+   The first two are SUBSTITUTED below with the closest Google Fonts:
+     • Avocado Cake  → Shantell Sans  (friendly, informal, bouncy display)
+     • Blog Script   → Caveat         (casual hand-painted script)
+   Replace the @import + --font-* vars with the real webfonts when available.
+--------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&family=Caveat:wght@400..700&display=swap');
+
+/* Avocado Cake — the real brand display font (self-hosted, uploaded).
+   NOTE: this is the Demo version (personal use). Swap in the licensed file for production. */
+@font-face {
+  font-family: "Avocado Cake";
+  src: url("fonts/Avocado_Cake_Demo.otf") format("opentype");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+/* Helvetica Neue — the real functional font (self-hosted, uploaded). Medium (500) cut.
+   Other weights fall through to the system Helvetica Neue / Helvetica / Arial stack. */
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("fonts/HelveticaNeueMedium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- CORE BRAND COLORS ----------
+     Light blue is THE core color. "When in doubt, lean into light blue." */
+  --ag-blue:        #5184a8;   /* primary — sea/sky light blue           */
+  --ag-blue-sky:    #7ba6c4;   /* lighter sky-blue tint (derived)        */
+  --ag-blue-deep:   #3d6885;   /* darker blue for text/press (derived)   */
+  --ag-sand:        #d1bda4;   /* warm beach sand                        */
+
+  /* ---------- SECONDARY / FULL PALETTE ----------
+     Soft but vibrant. Splashes of delight + bold full-bleed backgrounds. */
+  --ag-rose:        #d6a49e;   /* soft dusty rose                        */
+  --ag-clay:        #cb9890;   /* deeper terracotta rose                 */
+  --ag-orange:      #e27f1e;   /* sunset orange — the accent / call-out  */
+
+  /* ---------- NEUTRALS ----------
+     Utility + hierarchy without competing. Gray = type, white = bg. */
+  --ag-ink:         #4b4b4b;   /* primary text                           */
+  --ag-gray-1:      #777777;   /* secondary text                         */
+  --ag-gray-2:      #afafaf;   /* tertiary text / disabled               */
+  --ag-gray-3:      #e5e5e5;   /* borders / dividers                     */
+  --ag-gray-4:      #f7f7f7;   /* subtle fills / alt backgrounds         */
+  --ag-white:       #ffffff;   /* primary background                     */
+
+  /* ---------- SEMANTIC COLOR ROLES ---------- */
+  --fg-1:           var(--ag-ink);     /* headlines, primary copy        */
+  --fg-2:           var(--ag-gray-1);  /* body, secondary                */
+  --fg-3:           var(--ag-gray-2);  /* captions, meta                 */
+  --fg-on-color:    var(--ag-white);   /* text on blue/orange fields     */
+  --bg-1:           var(--ag-white);   /* page background                */
+  --bg-2:           var(--ag-gray-4);  /* alternating sections           */
+  --bg-tint:        #eef3f7;           /* faint blue wash                */
+  --brand:          var(--ag-blue);    /* primary brand surface          */
+  --brand-press:    var(--ag-blue-deep);
+  --accent:         var(--ag-orange);  /* primary CTA / highlight        */
+  --border:         var(--ag-gray-3);
+  --border-strong:  var(--ag-gray-2);
+
+  /* ---------- TYPE FAMILIES ---------- */
+  --font-display: "Avocado Cake", "Shantell Sans", "Comic Sans MS", cursive; /* brand display (Shantell Sans = fallback) */
+  --font-script:  "Caveat", "Blog Script Light", cursive;                    /* sub: Blog Script  */
+  --font-sans:    "Helvetica Neue", "Helvetica Neue LT Std", Helvetica, Arial, sans-serif;
+
+  /* ---------- TYPE SCALE (functional / UI sizes) ---------- */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   18px;
+  --text-xl:   22px;
+  --text-2xl:  28px;
+  --text-3xl:  36px;
+  --text-4xl:  48px;
+  --text-5xl:  64px;
+  --text-6xl:  88px;
+
+  --leading-tight:  1.05;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed:1.65;
+
+  --weight-light:   300;
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;
+
+  /* ---------- RADII ---------- */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+  --radius-pill:999px;
+
+  /* ---------- SHADOWS (soft, sunlit, low-contrast) ---------- */
+  --shadow-sm: 0 1px 2px rgba(75,75,75,.06), 0 1px 3px rgba(75,75,75,.08);
+  --shadow-md: 0 4px 12px rgba(61,104,133,.10), 0 2px 4px rgba(75,75,75,.06);
+  --shadow-lg: 0 16px 40px rgba(61,104,133,.16), 0 4px 10px rgba(75,75,75,.06);
+  --shadow-blue: 0 12px 28px rgba(81,132,168,.30);
+
+  /* ---------- SPACING (8px base) ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --ease-bounce: cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ============================================================
+   SEMANTIC TYPE STYLES
+   Display headlines: lowercase only, left-aligned, brief (<10 words).
+   Never all caps. Never justified. Never hyphenate.
+   ============================================================ */
+.ag-display,
+.ag-h1, .ag-h2, .ag-h3 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  color: var(--fg-1);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  text-transform: lowercase;     /* core rule: headlines are lowercase */
+  text-wrap: balance;
+}
+.ag-display { font-size: var(--text-6xl); line-height: .98; }
+.ag-h1 { font-size: var(--text-5xl); }
+.ag-h2 { font-size: var(--text-4xl); }
+.ag-h3 { font-size: var(--text-2xl); font-weight: var(--weight-medium); }
+
+/* Script — marketing voice, signatures, quotes, longer warm copy */
+.ag-script {
+  font-family: var(--font-script);
+  font-weight: var(--weight-regular);
+  color: var(--brand);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-snug);
+  text-transform: none;
+}
+
+/* Functional / UI text — Helvetica Neue */
+.ag-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+.ag-lead {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-2);
+}
+.ag-body {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-2);
+}
+.ag-small {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--fg-3);
+}
+.ag-label {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  color: var(--fg-1);
+}

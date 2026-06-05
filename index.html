@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agüita Sustainability LAB · 11 June 2026</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;}
+  body{margin:0;font-family:var(--font-sans);color:var(--fg-1);background:var(--bg-1);overflow-x:hidden;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent;}
+  :root{ --lab-green:#7e9b6e; --lab-green-soft:#eaf0e5; --wrap:1140px; }
+
+  /* ---- typography helpers ---- */
+  .display{font-family:var(--font-display);text-transform:lowercase;line-height:.95;letter-spacing:-.01em;}
+  .script{font-family:var(--font-script);line-height:1.1;}
+  .eyebrow{font-family:var(--font-sans);font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px;}
+
+  /* ---- buttons ---- */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:500;font-size:15px;
+    border:0;border-radius:var(--radius-pill);padding:14px 26px;cursor:pointer;transition:.2s var(--ease);white-space:nowrap;}
+  .btn svg{width:18px;height:18px;}
+  .btn-primary{background:var(--ag-blue);color:#fff;box-shadow:var(--shadow-blue);}
+  .btn-primary:hover{background:var(--ag-blue-deep);transform:translateY(-2px);}
+  .btn-accent{background:var(--ag-orange);color:#fff;box-shadow:0 10px 24px rgba(226,127,30,.32);}
+  .btn-accent:hover{background:#cf7314;transform:translateY(-2px);}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6);}
+  .btn-ghost:hover{background:rgba(255,255,255,.24);}
+
+  /* ---- NAV ---- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-in{display:flex;align-items:center;gap:28px;height:72px;}
+  .nav-logo{height:80px;width:auto;}
+  .nav-links{display:flex;gap:24px;margin-left:14px;}
+  .nav-links a{font-size:15px;color:var(--fg-1);opacity:.85;transition:.15s;}
+  .nav-links a:hover{opacity:1;color:var(--ag-blue);}
+  .nav-cta{margin-left:auto;display:flex;align-items:center;gap:16px;}
+  .nav-date{font-size:14px;color:var(--fg-2);display:flex;align-items:center;gap:7px;}
+  .nav-date svg{width:16px;height:16px;color:var(--ag-blue);}
+  @media(max-width:860px){.nav-links,.nav-date{display:none;}}
+
+  /* ---- HERO ---- */
+  .hero{position:relative;min-height:90vh;display:flex;align-items:flex-end;overflow:hidden;}
+  .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,60,75,.55) 0%,rgba(40,60,75,.15) 35%,rgba(30,46,57,.82) 100%);}
+  .hero-in{position:relative;width:100%;padding-top:54px;padding-bottom:54px;}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(126,155,110,.92);color:#fff;
+    border-radius:var(--radius-pill);padding:8px 16px;font-size:13px;font-weight:600;letter-spacing:.04em;margin-bottom:20px;}
+  .hero .kicker{color:#fff;opacity:.95;font-size:30px;transform:rotate(-2deg);margin-bottom:20px;}
+  .hero h1{color:#fff;font-size:clamp(48px,6vw,90px);margin:80px 0 30px;text-shadow:0 3px 22px rgba(30,46,57,.4);}  
+  .hero p.lead{color:rgba(255,255,255,.94);font-weight:300;font-size:clamp(17px,2.2vw,21px);line-height:1.55;max-width:620px;margin:0 0 28px;}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:30px;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:26px;}
+  .hero-meta .m{display:flex;align-items:center;gap:10px;color:#fff;}
+  .hero-meta svg{width:22px;height:22px;color:var(--ag-sand);flex-shrink:0;}
+  .hero-meta .m b{display:block;font-size:15px;font-weight:600;}
+  .hero-meta .m span{font-size:13px;color:rgba(255,255,255,.75);}
+
+  /* ---- CONCEPT band ---- */
+  .concept{padding:88px 0;}
+  .concept-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .concept .eyebrow{color:var(--lab-green);margin-bottom:14px;}
+  .concept h2{font-size:clamp(34px,4.5vw,52px);margin:0 0 18px;color:var(--fg-1);}
+  .concept p{font-weight:300;font-size:18px;line-height:1.65;color:var(--fg-2);margin:0 0 16px;max-width:520px;}
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .pill{font-size:13.5px;font-weight:500;border-radius:var(--radius-pill);padding:8px 15px;background:var(--lab-green-soft);color:#5d7350;}
+  .pill.blue{background:var(--bg-tint);color:var(--ag-blue-deep);}
+  .concept-media{position:relative;}
+  .concept-media .main{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/3;}
+  .concept-media .main img{width:100%;height:100%;object-fit:cover;}
+  .concept-media .chip{position:absolute;bottom:-22px;left:-22px;width:180px;border-radius:var(--radius-lg);overflow:hidden;
+    box-shadow:var(--shadow-lg);border:5px solid #fff;aspect-ratio:1;}
+  .concept-media .chip img{width:100%;height:100%;object-fit:cover;}
+  .moon{position:absolute;top:-44px;right:-10px;width:96px;transform:rotate(8deg);}
+  @media(max-width:820px){.concept-grid{grid-template-columns:1fr;gap:40px;}.moon{display:none;}}
+
+  /* ---- TIMELINE ---- */
+  .timeline-sec{background:var(--bg-2);padding:90px 0;}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 56px;}
+  .sec-head .script{color:var(--ag-orange);font-size:28px;transform:rotate(-2deg);}
+  .sec-head h2{font-size:clamp(34px,4.5vw,52px);margin:4px 0 12px;color:var(--fg-1);}
+  .sec-head p{font-weight:300;font-size:17px;color:var(--fg-2);line-height:1.6;margin:0;}
+  .tl{position:relative;max-width:760px;margin:0 auto;}
+  .tl::before{content:"";position:absolute;left:31px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--ag-blue),var(--lab-green));opacity:.45;}
+  .step{position:relative;display:grid;grid-template-columns:64px 1fr;gap:20px;padding:14px 0;}
+  .dot{position:relative;z-index:2;width:64px;height:64px;border-radius:50%;background:#fff;border:2px solid var(--border);
+    display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);}
+  .dot svg{width:28px;height:28px;color:var(--ag-blue);}
+  .step.green .dot svg{color:var(--lab-green);}
+  .step.accent .dot{background:var(--ag-orange);border-color:var(--ag-orange);}
+  .step.accent .dot svg{color:#fff;}
+  .card{background:#fff;border-radius:var(--radius-lg);padding:20px 22px;box-shadow:var(--shadow-md);transition:.2s var(--ease);}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+  .card .time{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--ag-blue);}
+  .step.green .card .time{color:var(--lab-green);}
+  .step.accent .card .time{color:var(--ag-orange);}
+  .card h3{font-family:var(--font-display);text-transform:lowercase;font-size:26px;line-height:1;margin:5px 0 8px;color:var(--fg-1);}
+  .card p{font-size:14.5px;line-height:1.55;color:var(--fg-2);margin:0;}
+  .who{display:inline-flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  .who span{font-size:12px;font-weight:500;border-radius:var(--radius-pill);padding:4px 11px;background:var(--bg-tint);color:var(--ag-blue-deep);}
+  .tl-note{text-align:center;font-size:13px;color:var(--fg-3);margin-top:30px;}
+
+  /* ---- SPEAKERS ---- */
+  .speakers{padding:90px 0;}
+  .sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:900px;margin:0 auto;}
+  .sp{background:#fff;border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);transition:.2s var(--ease);}
+  .sp:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+  .sp .ph{aspect-ratio:1;overflow:hidden;background:var(--ag-sand);}
+  .sp .ph img{width:100%;height:100%;object-fit:cover;}
+  .sp .body{padding:22px 24px 26px;}
+  .sp .role-tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;border-radius:var(--radius-pill);padding:5px 13px;margin-bottom:12px;}
+  .sp.blue .role-tag{background:var(--bg-tint);color:var(--ag-blue-deep);}
+  .sp.green .role-tag{background:var(--lab-green-soft);color:#5d7350;}
+  .sp h3{font-family:var(--font-display);text-transform:lowercase;font-size:30px;margin:0 0 4px;color:var(--fg-1);}
+  .sp .title{font-size:14px;color:var(--fg-2);line-height:1.45;margin:0 0 12px;}
+  .sp .resp{font-size:14.5px;color:var(--fg-1);line-height:1.5;margin:0;}
+  @media(max-width:680px){.sp-grid{grid-template-columns:1fr;}}
+
+  /* ---- FAQ ---- */
+  .faq{background:var(--bg-2);padding:90px 0;}
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  .q{background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);overflow:hidden;}
+  .q button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;
+    background:none;border:0;cursor:pointer;padding:20px 22px;font-family:var(--font-sans);font-size:17px;font-weight:500;color:var(--fg-1);}
+  .q button .ic{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--bg-tint);display:flex;align-items:center;justify-content:center;transition:.25s var(--ease);}
+  .q button .ic svg{width:15px;height:15px;color:var(--ag-blue);}
+  .q.open button .ic{transform:rotate(45deg);background:var(--ag-blue);}
+  .q.open button .ic svg{color:#fff;}
+  .q .ans{max-height:0;overflow:hidden;transition:max-height .3s var(--ease);}
+  .q .ans p{margin:0;padding:0 22px 22px;font-size:15px;font-weight:300;line-height:1.6;color:var(--fg-2);}
+
+  /* ---- FINAL CTA ---- */
+  .final{position:relative;background:var(--ag-blue);color:#fff;text-align:center;padding:84px 0;overflow:hidden;}
+  .final .script{color:rgba(255,255,255,.92);font-size:30px;transform:rotate(-2deg);}
+  .final h2{font-size:clamp(36px,5vw,60px);margin:6px 0 16px;}
+  .final p{font-weight:300;font-size:18px;color:rgba(255,255,255,.9);max-width:520px;margin:0 auto 28px;line-height:1.6;}
+  .final .trio{position:absolute;right:-20px;bottom:-10px;width:160px;opacity:.95;}
+  @media(max-width:680px){.final .trio{display:none;}}
+
+  /* ---- FOOTER ---- */
+  footer{background:var(--ag-ink);color:#fff;padding:54px 0 36px;}
+  .ft-in{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;justify-content:space-between;}
+  .ft-logo{height:76px;width:auto;filter:brightness(0) invert(1);}
+  .ft-by{font-size:15px;color:rgba(255,255,255,.82);line-height:1.7;}
+  .ft-by b{color:#fff;font-weight:600;}
+  .ft-sponsor{font-size:13px;color:rgba(255,255,255,.6);letter-spacing:.02em;}
+  .ft-meta{display:flex;align-items:center;gap:9px;font-size:14px;color:rgba(255,255,255,.82);margin-top:6px;}
+  .ft-meta svg{width:16px;height:16px;color:var(--ag-sand);}
+  .ft-bottom{border-top:1px solid rgba(255,255,255,.14);margin-top:34px;padding-top:20px;font-size:13px;color:rgba(255,255,255,.55);}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top"><img class="nav-logo" src="assets/logo/aguita-logo-blue.png" alt="Agüita House"></a>
+    <div class="nav-links">
+      <a href="#concept">Overview</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <span class="nav-date" data-icon="calendar"></span>
+      <a class="btn btn-primary" href="https://wa.me/34603786656?text=Hi%21%20I%27d%20like%20to%20reserve%20a%20spot%20for%20the%20Ag%C3%BCita%20Sustainability%20LAB%20on%20Thursday%2011%20June%202026%20%3A)" target="_blank" rel="noopener">reserve a spot</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <img class="bg" src="img/rooftop.jpg" alt="Agüita House rooftop at sunset">
+  <div class="scrim"></div>
+  <div class="wrap hero-in">
+    <div class="badge"><span>🌱</span> Sustainable automation · hands-on lab</div>
+    <div class="kicker script">Agüita house rooftop · sunset session</div>
+    <h1 class="display">Agüita<br> sustainability lab</h1>
+    <p class="lead">A hands-on tech lab where anyone, no coding or hardware background needed, 
+      learns how small, smart automations can make everyday things more efficient and more
+      sustainable. we build it together, on the rooftop, in front of the ocean.</p>
+    <div class="hero-cta">
+      <a class="btn btn-accent" href="https://wa.me/34603786656?text=Hi%21%20I%27d%20like%20to%20reserve%20a%20spot%20for%20the%20Ag%C3%BCita%20Sustainability%20LAB%20on%20Thursday%2011%20June%202026%20%3A)" target="_blank" rel="noopener">reserve a spot <span data-icon="arrow"></span></a>
+      <a class="btn btn-ghost" href="#timeline">see the timeline</a>
+    </div>
+    <div class="hero-meta">
+      <div class="m"><span data-icon="calendar"></span><div><b>Thursday 11 June 2026</b><span>doors &amp; intro from 18:00</span></div></div>
+      <div class="m"><span data-icon="pin"></span><div><b>Agüita House rooftop</b><span>Las Palmas de Gran Canaria</span></div></div>
+      <div class="m"><span data-icon="users"></span><div><b>All levels welcome</b><span>limited hands-on seats</span></div></div>
+    </div>
+  </div>
+</header>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div class="wrap concept-grid">
+    <div class="reveal">
+      <div class="eyebrow">what it's about</div>
+      <h2 class="display">efficiency you can build yourself</h2>
+      <p>the idea is simple: through a technical lab with small, sustainability-minded experiments,
+        we show that <b>anyone can improve how things work</b>. A plant that waters itself, a web app
+        that reads the surf without being an engineer.</p>
+      <p>We start from the finished lab (top-down), break it into two live experiments, then you
+        rebuild them in groups as far as you can get. You leave with a real web app to keep playing at home.</p>
+      <div class="pills">
+        <span class="pill">🌱 sustainable by design</span>
+        <span class="pill blue">no experience needed</span>
+        <span class="pill blue">build in small groups</span>
+        <span class="pill">take it home</span>
+      </div>
+    </div>
+    <div class="concept-media reveal">
+      <img class="moon" src="assets/illustrations/crescent-moon.png" alt="">
+      <div class="main"><img src="img/smart-camera.jpg" alt="Automated AI sensor system by IDeTIC"></div>
+      <div class="chip"><img src="img/sensor-ai.jpg" alt="Sensor prototype"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-sec" id="timeline">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="script">how the evening flows</div>
+      <h2 class="display">the lab, step by step</h2>
+      <p>one rooftop afternoon, from a full demo to your own build — and a goodbye you can take home.</p>
+    </div>
+    <div class="tl" id="tl"></div>
+    <p class="tl-note">times are indicative — we follow the energy of the group 🌅</p>
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section class="speakers" id="speakers">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="script">your guides for the night</div>
+      <h2 class="display">the people behind the lab</h2>
+      <p>Two builders running the floor, one on code, one on hardware. This is hardware support and coding support</p>
+    </div>
+    <div class="sp-grid">
+      <div class="sp blue reveal">
+        <div class="ph"><img src="img/nicola.jpg" alt="Nicola Gasparro"></div>
+        <div class="body">
+          <span class="role-tag">coding support</span>
+          <h3 class="display">nicola gasparro</h3>
+          <p class="title">Software developer · React &amp; Next.js specialist</p>
+          <p class="resp">Runs the coding side of the lab and the take-home web app, helping every group get their experiment talking.</p>
+        </div>
+      </div>
+      <div class="sp green reveal">
+        <div class="ph"><img src="img/vicente.png" alt="Vicente Matus Icaza"></div>
+        <div class="body">
+          <span class="role-tag">hardware support</span>
+          <h3 class="display">vicente matus icaza</h3>
+          <p class="title">PhD, Enterprise &amp; Internet Technologies</p>
+          <p class="resp">Leads the hardware and sensors, and demos the real-world “automated AI sensor system” use case.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="script">good to know</div>
+      <h2 class="display">frequently asked</h2>
+    </div>
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="join">
+  <img class="trio" src="assets/illustrations/trio-friends.png" alt="">
+  <div class="wrap">
+    <div class="script">come build with us</div>
+    <h2 class="display">save your seat on the rooftop</h2>
+    <p>hands-on spots are limited and it's free to join. grab a place, bring your curiosity and
+      we'll bring the kits, the sunset and the snacks.</p>
+    <a class="btn btn-accent" href="https://wa.me/34603786656?text=Hi%21%20I%27d%20like%20to%20reserve%20a%20spot%20for%20the%20Ag%C3%BCita%20Sustainability%20LAB%20on%20Thursday%2011%20June%202026%20%3A)" target="_blank" rel="noopener" style="font-size:17px;padding:16px 32px;">reserve your spot</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap ft-in">
+    <div>
+      <img class="ft-logo" src="assets/logo/aguita-logo-blue.png" alt="Agüita House">
+      <div class="ft-meta"><span data-icon="pin"></span> Agüita House · Las Palmas de Gran Canaria. Paseo de las Canteras, 53</div>
+    </div>
+    <div>
+      <div class="ft-by">organised by <b>Nicola Gasparro</b> &amp; <b>Vicente Matus</b></div>
+      <div class="ft-sponsor" style="margin-top:8px;">Sponsored by <b style="color:rgba(255,255,255,.85)">IDeTIC · ULPGC</b><br>and Digital Consulting Agüita SL</div>
+    </div>
+  </div>
+  <div class="wrap ft-bottom">© 2026 Agüita Sustainability LAB · feel just like home :)</div>
+</footer>
+
+<script>
+/* ---- inline icon set (Lucide, MIT) ---- */
+const ICONS={
+  calendar:'<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>',
+  pin:'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  hand:'<path d="M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+  layers:'<path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',
+  sprout:'<path d="M7 20h10M10 20c5.5-2.5.83-6.1 1-9M9.5 9.4c1.1.6 2.6.5 3.8-.4 1.4-1 2.2-3 1.8-4.8-1.8-.3-3.7.4-5 1.5-1.1.9-1.7 2.3-1.6 3.7zM14.1 6a7 7 0 0 0-1.1 4c1.9.1 3.3-.6 4.3-2 .9-1.4 1.2-3.5.7-5.3-1.9.1-3.2.9-3.9 3.3z"/>',
+  waves:'<path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>',
+  flask:'<path d="M9 3h6M10 3v6.3a2 2 0 0 1-.3 1L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3l-5.2-8.7a2 2 0 0 1-.3-1V3M7 14h10"/>',
+  present:'<path d="M2 3h20M3 3v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3M12 16v6M8 22h8"/>',
+  cpu:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+  chat:'<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+  home:'<path d="M3 9.5 12 3l9 6.5M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/><path d="M9 21v-6h6v6"/>'
+};
+function svg(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[name]||'')+'</svg>';}
+document.querySelectorAll('[data-icon]').forEach(el=>{el.innerHTML=svg(el.getAttribute('data-icon'))+ (el.classList.contains('nav-date')?' Thu 11 Jun · 18:00':'');});
+
+/* ---- timeline data ---- */
+const STEPS=[
+  {t:'18:00',icon:'hand',title:'welcome & intro',d:'Nicola Gasparro and Vicente Matus open the lab and set the scene for the evening.',who:['Nicola','Vicente'],tone:''},
+  {t:'18:15',icon:'layers',title:'top-down: the full lab',d:'A demo of the complete system end-to-end — from sensors to the web app — so you see where we\u2019re heading.',who:[],tone:''},
+  {t:'18:30',icon:'sprout',title:'experiment #1 · self-watering plant',d:'A plant that waters itself by reading soil moisture with a microcontroller. The simplest possible smart, sustainable automation.',who:[],tone:'green'},
+  {t:'18:45',icon:'waves',title:'experiment #2 · surf wave tracker web app',d:'A little web app that tracks the waves, tides and sensor data into something a surfer actually checks.',who:[],tone:''},
+  {t:'19:00',icon:'flask',title:'lab groups, build it yourself',d:'Split into small groups and reproduce the experiments, hands-on, as far as you can get.',who:[],tone:'green'},
+  {t:'19:45',icon:'present',title:'share the results',d:'Each group demos and explains what they built — and how far they understood it. No wrong answers.',who:[],tone:''},
+  {t:'20:00',icon:'cpu',title:'real use case · automated AI sensor system',d:'A practical implementation demo of an automated AI sensor system, presented by Vicente Matus.',who:['Vicente'],tone:'accent'},
+  {t:'20:20',icon:'chat',title:'q&a',d:'Open floor — hardware questions to Vicente, coding questions to Nicola.',who:['HW · Vicente','Code · Nicola'],tone:''},
+  {t:'20:40',icon:'home',title:'goodbye & try at home',d:'The coding lab hands you the whole experiment as a web app, so you can keep building at home.',who:[],tone:'green'}
+];
+document.getElementById('tl').innerHTML=STEPS.map(s=>`
+  <div class="step ${s.tone} reveal">
+    <div class="dot">${svg(s.icon)}</div>
+    <div class="card">
+      <div class="time">${s.t}</div>
+      <h3>${s.title}</h3>
+      <p>${s.d}</p>
+      ${s.who.length?`<div class="who">${s.who.map(w=>`<span>${w}</span>`).join('')}</div>`:''}
+    </div>
+  </div>`).join('');
+
+/* ---- FAQ ---- */
+const FAQ=[
+  {q:'Do I need any tech experience?',a:'Not at all. The whole lab is built for people starting from zero — we explain everything, and there\u2019s a guide on code and one on hardware for every step.'},
+  {q:'What should I bring?',a:'Just yourself and your curiosity. A laptop is handy if you have one, but all the hardware, sensors and kits are provided.'},
+  {q:'How much does it cost?',a:'It\u2019s free to join, donations welcome to support the lab — but hands-on seats on the rooftop are limited, so reserve your spot in advance.'},
+  {q:'How long does it run?',a:'We start at 18:00 and wrap up around 21:00, right through the sunset on the Agüita House rooftop.'},
+  {q:'What language is it in?',a:'Friendly and mixed — English first, with Spanish and Italian support from the team whenever you need it.'},
+  {q:'Can I keep building afterwards?',a:'Yes — you leave with the lab as a working web app, so you can reproduce the experiments at home.'}
+];
+document.getElementById('faq-list').innerHTML=FAQ.map(f=>`
+  <div class="q">
+    <button>${f.q}<span class="ic">${svg('plus')}</span></button>
+    <div class="ans"><p>${f.a}</p></div>
+  </div>`).join('');
+document.querySelectorAll('.q button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const q=b.parentElement, ans=q.querySelector('.ans'), open=q.classList.contains('open');
+    document.querySelectorAll('.q').forEach(x=>{x.classList.remove('open');x.querySelector('.ans').style.maxHeight=null;});
+    if(!open){q.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+  });
+});
+
+/* ---- reveal on scroll ---- */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
